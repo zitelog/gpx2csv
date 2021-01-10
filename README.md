@@ -20,7 +20,8 @@ optional arguments:
   -h, --help        show this help message and exit
 
   --stopping-time   (integer) is the value (in seconds) of how long a stopover should lasts for the vehicle or the user to be 
-                    considered unmoving, eg. a car in the traffic makes many stops (generally short) and therefore cannot be considered parked. *You must use it together with the speed-range eg. --stopping-time 600 --speed-range 0 5
+                    considered unmoving, eg. a car in the traffic makes many stops (generally short) and therefore cannot be considered parked.
+                    *You must use it together with the speed-range eg. --stopping-time 600 --speed-range 0 5
 
   --speed-range     Are min and max values (in km/h) to consider the vehicle or the user unmoving. *You must use it together with   
                     the stopping-time eg. --stopping-time 600 --speed-range 0 5
