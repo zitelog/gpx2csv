@@ -1,6 +1,6 @@
 # gpx2csv
 `gpx2cvs` is a Python3 script to parse gpx file (XML schema for GPS data format for software applications), get element data from its tags "<trkpt>" (track points) and save the result on csv file. Moreover, it's possible to filter the parsed result from two variables speed range and stopover time. 
-Finally, it's also possible to configure the column labels of the first row of output file CSV (csv_hedear) in the config/global_settings.py.
+Finally, it's also possible to configure the column labels of the first row of output file CSV (csv_hedear) in the `config/global_settings.py`.
 
 At the moment I only tested it with files similar to the one used for the sample.gpx tests, so the script should crash if it is analyzing something different from what expected ... otherwise, it is a bug.
 
@@ -30,9 +30,34 @@ optional arguments:
   --output-path     output directory, must exist. If no path is specified the file will be saved in the current directory
 ```
 
+## Config
+Configure the column labels of the first row of output file CSV (csv_hedear) in the `config/global_settings.py` 
+```
+#
+#   *       Start stopping info     *       End stopping info        *    
+#   *-------------------------------*--------------------------------*
+#   *                               *                                *
+#   [latitude, longitude, date, hour, latitude, longitude, date, hour, stopping_duration]
+#
+filtered_header = [
+    'start_latitude','start_longitude','start_date','start_hour', #fileds correspond to begin of stopover
+    'end_latitude','end_longitude','end_date','end_hour', #fields correspond to the end of stopover
+    'stopping_duration (integer rounded minutes)'
+]
+
+default_header = [
+    'latitude','longitude', 'time (original)','date','hour',
+    'time_zone','speed','ele','sat','hdop'
+]
+
+#header for gpx parsing result
+cvs_header['gpx'] = {'default': default_header, 'filtered': filtered_header}
+```
+
+
 ### Example
 
 ```
 $ python gpx2csv.py sample.gpx --speed-range 0 5 --stopping-time 600 --output-path ~/Desktop
 ```
-It will create in the output folder (`~/Desktop/`) the sample.csv file
+It will create in the output folder (`~/Desktop/`) the `sample.csv` file
