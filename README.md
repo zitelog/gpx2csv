@@ -6,6 +6,9 @@ At the moment I only tested it with files similar to the one used for the sample
 
 The script is meant to be expandable to other formats in both input and output, so if I need to parse another file type I will update this.
 
+*Here https://github.com/zitelog/gpx2csv/releases/tag/v1.0.0 you find a compiled version for windwos (gpx2csv.exe)*
+
+
 ## Usage
 
 ```
