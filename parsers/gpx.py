@@ -6,7 +6,7 @@
 # Created Date: Monday, January 4th 2021, 11:03:56 am
 # Author: Fabio Zito
 # -----
-# Last Modified: Sun Jan 10 2021
+# Last Modified: Tue Jan 19 2021
 # Modified By: Fabio Zito
 # -----
 # MIT License
@@ -152,6 +152,9 @@ class GPX:
 
         max_speed += 1 #Increment of 1 because range doesn't consider last value
 
+        last_row = len(rows)
+        counter = 1
+
         for row in rows:
 
             latitude  = row[0]
@@ -177,15 +180,22 @@ class GPX:
                 seconds = end_time - start_time
 
                 if seconds >= stopping_time:
-                    minutes = seconds // seconds_in_minute
+                    minutes = seconds / seconds_in_minute
                     seconds = seconds - (minutes * seconds_in_minute)
                     stopping_duration = f"{minutes}:{seconds}"
                     del canditate_row[4:] #remove all element affter the first four 
-                    canditate_row.extend([latitude, longitude, date, hour, int(minutes)]) #fields correspond to the end of stopover
+                    canditate_row.extend([latitude, longitude, date, hour, round(minutes)]) #fields correspond to the end of stopover
             else:
                 start_time = 0
                 end_time = 0
 
+                if len(canditate_row) > 4:
+                    filter_rows.append(canditate_row.copy())
+                    canditate_row.clear()
+
+            counter += 1
+
+            if last_row == counter:
                 if len(canditate_row) > 4:
                     filter_rows.append(canditate_row.copy())
                     canditate_row.clear()
